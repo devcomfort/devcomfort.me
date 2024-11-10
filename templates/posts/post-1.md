@@ -1,4 +1,8 @@
 ---
+# tsconfig.json을 통한 ESM/CJS 빌드
+# rollup을 통한 ESM/CJS/UMD 빌드
+# rollup을 사용하는 편이 좋은 이유 (tsconfig는 번들링을 수행하지 않아서 브라우저 호환성이 0임)
+
 title: The Advantages & Disadvantages of Working from Home
 excerpt: In recent years, the way we work has undergone a significant transformation, largely due to advancements in technology and changing attitudes toward work-life balance. One of the most notable changes has been the rise of remote work, allowing employees to work from the comfort of their own homes.
 publishDate: 'Aug 5 2023'
