@@ -1,66 +1,54 @@
 ---
-title: 'EcoBuddy: Sustainable Living App'
-description: EcoBuddy is a mobile app that gamifies sustainable living. Users can set eco-friendly goals, track their carbon footprint, and earn virtual rewards for adopting environmentally conscious habits.
-publishDate: 'Jan 02 2024'
-seo:
-  image:
-    src: '/project-1.jpg'
-    alt: Project preview
+title: '@devcomfort/text-transcoder'
+description: text-transcoder는 텍스트 인코딩을 변환할 수 있는 JS/TS 라이브러리입니다.
+publishDate: 'Jul 28 2024'
+# seo:
+#   image:
+#     src: '/project-1.jpg'
+#     alt: Project preview
 ---
 
-![Project preview](/project-1.jpg)
+### Project Overview:
 
-**Note:** This case study is entirely fictional and created for the purpose of showcasing [Dante Astro.js theme functionality](https://justgoodui.com/astro-themes/dante/).
-
-**Project Overview:**
-EcoBuddy is a revolutionary mobile application designed to make sustainable living accessible, engaging, and rewarding. With a focus on gamification and real-world impact, EcoBuddy encourages users to adopt eco-friendly habits, reduce their carbon footprint, and contribute to a healthier planet.
+**@devcomfort/text-transcoder**는 텍스트 인코딩 변환을 위한 JavaScript/TypeScript 라이브러리입니다.
+기존 텍스트 인코딩 변환 라이브러리에서 지원하지 않는 인코딩, 타입 안정성, 호환성을 개선하기 위해 개발한 라이브러리입니다.
 
 ## Objectives
 
-1. Develop a user-friendly mobile app that motivates individuals to adopt sustainable practices in their daily lives.
-2. Utilize gamification elements to make sustainable living fun and interactive.
-3. Provide educational resources and personalized challenges to empower users to make informed eco-conscious decisions.
+1. 사용자 친화적인 API
+2. 타입 안정성
+3. 라이브러리 호환성
 
 ## Features
 
-1. **EcoScore and Challenges:**
+1. **사용자 친화적인 API**
 
-- Users are assigned an EcoScore based on their sustainable activities and choices.
-- Daily and weekly challenges encourage users to adopt new habits and compete with friends or the community to earn EcoPoints.
+- **reEncode**라는 함수 하나로 인코딩 변환을 수행할 수 있습니다.
+- 별도의 학습 없이 사용할 수 있습니다.
 
-2. **Personalized Eco-Goals:**
+2. **타입 안정성**
 
-- Users can set and track personalized eco-goals, such as reducing plastic usage, conserving water, or choosing eco-friendly transportation.
-- The app provides tips and suggestions to help users achieve their goals.
+- 지원되는 인코딩에 대한 타입을 추가하였습니다.
+- TypeScript를 지원하는 IDE에서 텍스트 인코딩, 함수에 대한 자동완성을 사용할 수 있습니다.
 
-3. **Green Rewards Marketplace:**
+3. **라이브러리 호환성**
 
-- EcoPoints earned through challenges and sustainable actions can be redeemed in a virtual Green Rewards Marketplace.
-- The marketplace offers discounts on eco-friendly products, services, and even contributions to environmental causes.
-
-4. **Community Hub:**
-
-- A community feature allows users to connect, share their eco-friendly achievements, and inspire others.
-- Users can join local eco-groups, organize clean-up events, and collaborate on sustainability projects.
-
-5. **EcoEducator AI Assistant:**
-
-- An AI-powered assistant, EcoEducator, provides personalized eco-tips, facts, and information based on users' preferences and habits.
-- Users can chat with EcoEducator for instant advice on sustainable living.
+- 번들링 과정에서 ECMAScript(ESM), CommonJS(CJS), UMD 3가지 방식으로 빌드합니다.
+- 사용자의 프로젝트 환경과 무관하게 라이브러리를 호출하여 사용할 수 있습니다.
 
 ## Technology Stack
 
-- Frontend: React Native for cross-platform mobile app development.
-- Backend: Firebase for real-time data synchronization and user authentication.
-- Database: Firestore for scalable and flexible data storage.
-- AI Integration: Dialogflow for natural language processing and conversation with EcoEducator.
+- Bundling: rollup, sucrase
+- Test: vitest
+- Type-safety: zod
+- Dependencies: text-decoding
 
 ## Outcome
 
-EcoBuddy has successfully created a community of environmentally conscious individuals who actively participate in sustainable living practices. The app not only educates and motivates users but also provides tangible rewards for their commitment to a greener lifestyle, fostering a positive impact on the environment.
+**@devcomfort/text-transcoder**는 텍스트 인코딩 변환 라이브러리입니다.
+JavaScript/TypeScript 개발 생태계의 새로운 텍스트 인코딩 변환 라이브러리로서
+타입 안전성, 호환성, 사용성 모두 확보하고자 개발한 라이브러리입니다.
 
-## Client Testimonial
+2024년 11월 기준 Weekly Download 통계 (NPM Trends):
 
-> We couldn't be happier with the results delivered by Ethan Donovan. From the initial concept discussions to the final product, their responsiveness and collaborative approach were impressive. Our startup's website now stands out, thanks to their creative input and commitment to excellence.
-
-**Note:** This case study is entirely fictional and created for the purpose of showcasing [Dante Astro.js theme functionality](https://justgoodui.com/astro-themes/dante/).
+<img src="/devcomfort-text-transcoder-npm-trends.png" />
