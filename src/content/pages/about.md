@@ -45,13 +45,13 @@ seo:
       <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" />
   </a>
   <a href="https://solidjs.com/" target="_blank" rel="noreferrer">
-      <img src="./icons/solidjs.png" alt="solid" />
+      <img src="/icons/solidjs.png" alt="solid" />
   </a>
   <a href="https://svelte.dev" target="_blank" rel="noreferrer">
       <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Svelte_Logo.svg" alt="svelte" />
   </a>
   <a href="https://vitest.dev/" target="_blank" rel="noreferrer">
-      <img src="./icons/vitest.svg" alt="vitest" />
+      <img src="/icons/vitest.svg" alt="vitest" />
   </a>
   <a href="https://www.mongodb.com/" target="_blank" rel="noreferrer">
       <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg" alt="mongodb" />
@@ -63,19 +63,19 @@ seo:
       <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg" alt="express" />
   </a>
   <a href="https://hono.dev/" target="_blank" rel="noreferrer">
-      <img src="./icons/hono-seeklogo.svg" alt="hono" />
+      <img src="/icons/hono-seeklogo.svg" alt="hono" />
   </a>
   <a href="https://www.docker.com/" target="_blank" rel="noreferrer">
       <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg" alt="docker" />
   </a>
   <a href="https://github.com/features/actions" target="_blank" rel="noreferrer">
-      <img src="./icons/github-actions.png" alt="github actions" />
+      <img src="/icons/github-actions.png" alt="github actions" />
   </a>
   <a href="https://tauri.studio/" target="_blank" rel="noreferrer">
-      <img src="./icons/tauri.svg" alt="tauri" />
+      <img src="/icons/tauri.svg" alt="tauri" />
   </a>
   <a href="https://pytest.org/" target="_blank" rel="noreferrer">
-      <img src="./icons/pytest.webp" alt="pytest" />
+      <img src="/icons/pytest.webp" alt="pytest" />
   </a>
   <a href="https://www.chartjs.org" target="_blank" rel="noreferrer">
       <img src="https://www.chartjs.org/media/logo-title.svg" alt="chartjs" />
