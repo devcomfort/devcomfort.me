@@ -1,7 +1,7 @@
 ---
 title: 'blob-to-url'
 description: Blob 객체를 URL로 변환하고 관리하는 JavaScript/TypeScript 라이브러리입니다.
-publishDate: 'Jul 28 2024'
+publishDate: 'Apr 01 2025'
 # seo:
 #   image:
 #     src: '/project-2.jpg'
@@ -63,6 +63,6 @@ revokeUrl(url);
 **blob-to-url**은 웹 개발자들이 Blob URL을 더 쉽고 안전하게 다룰 수 있게 해주는 라이브러리입니다.
 자동 메모리 관리 기능으로 메모리 누수 걱정 없이 파일 처리, 데이터 다운로드, 이미지 미리보기 등 다양한 웹 기능을 구현할 수 있습니다.
 
-2024년 11월 기준 주간 다운로드 통계 (NPM Trends):
+주간 다운로드 통계 (NPM Trends):
 
-<img src="/blob-to-url-npm-trends.png" /> 
+<img src="https://www.npmcharts.com/compare/@devcomfort/text-transcoder?minimal=true" /> 

@@ -1,7 +1,7 @@
 ---
 title: '@devcomfort/text-transcoder'
 description: 텍스트 인코딩 변환을 쉽게 할 수 있는 JavaScript/TypeScript 라이브러리입니다.
-publishDate: 'Jul 28 2024'
+publishDate: 'Apr 01 2025'
 # seo:
 #   image:
 #     src: '/project-1.jpg'
@@ -48,6 +48,6 @@ publishDate: 'Jul 28 2024'
 **@devcomfort/text-transcoder**는 텍스트 인코딩 변환을 위한 새로운 라이브러리입니다.
 JavaScript/TypeScript 개발자들이 안전하고 편리하게 텍스트 인코딩을 변환할 수 있도록 도와줍니다.
 
-2024년 11월 기준 주간 다운로드 통계 (NPM Trends):
+주간 다운로드 통계 (NPM Trends):
 
-<img src="/devcomfort-text-transcoder-npm-trends.png" />
+<img src="https://www.npmcharts.com/compare/@devcomfort/text-transcoder?minimal=true" />
