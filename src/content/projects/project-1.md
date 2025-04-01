@@ -1,6 +1,6 @@
 ---
 title: '@devcomfort/text-transcoder'
-description: text-transcoder는 텍스트 인코딩을 변환할 수 있는 JS/TS 라이브러리입니다.
+description: 텍스트 인코딩 변환을 쉽게 할 수 있는 JavaScript/TypeScript 라이브러리입니다.
 publishDate: 'Jul 28 2024'
 # seo:
 #   image:
@@ -8,47 +8,46 @@ publishDate: 'Jul 28 2024'
 #     alt: Project preview
 ---
 
-### Project Overview:
+### 프로젝트 소개
 
-**@devcomfort/text-transcoder**는 텍스트 인코딩 변환을 위한 JavaScript/TypeScript 라이브러리입니다.
-기존 텍스트 인코딩 변환 라이브러리에서 지원하지 않는 인코딩, 타입 안정성, 호환성을 개선하기 위해 개발한 라이브러리입니다.
+**@devcomfort/text-transcoder**는 텍스트 인코딩을 쉽게 변환할 수 있게 해주는 JavaScript/TypeScript 라이브러리입니다.
+기존 텍스트 인코딩 변환 라이브러리들의 부족한 점을 개선하여, 더 많은 인코딩을 지원하고 타입 안정성과 호환성을 높였습니다.
 
-## Objectives
+## 개발 목표
 
-1. 사용자 친화적인 API
-2. 타입 안정성
-3. 라이브러리 호환성
+1. 누구나 쉽게 사용할 수 있는 API
+2. 안전한 타입 시스템
+3. 다양한 환경에서 사용 가능한 호환성
 
-## Features
+## 주요 기능
 
-1. **사용자 친화적인 API**
+1. **쉬운 사용법**
 
-- **reEncode**라는 함수 하나로 인코딩 변환을 수행할 수 있습니다.
-- 별도의 학습 없이 사용할 수 있습니다.
+- `reEncode` 함수 하나로 모든 인코딩 변환이 가능합니다
+- 복잡한 설정 없이 바로 사용할 수 있습니다
 
 2. **타입 안정성**
 
-- 지원되는 인코딩에 대한 타입을 추가하였습니다.
-- TypeScript를 지원하는 IDE에서 텍스트 인코딩, 함수에 대한 자동완성을 사용할 수 있습니다.
+- 지원되는 모든 인코딩에 대한 타입 정의가 완벽합니다
+- TypeScript를 지원하는 에디터에서 자동완성 기능을 사용할 수 있습니다
 
-3. **라이브러리 호환성**
+3. **넓은 호환성**
 
-- 번들링 과정에서 ECMAScript(ESM), CommonJS(CJS), UMD 3가지 방식으로 빌드합니다.
-- 사용자의 프로젝트 환경과 무관하게 라이브러리를 호출하여 사용할 수 있습니다.
+- ECMAScript(ESM), CommonJS(CJS), UMD 세 가지 방식으로 빌드됩니다
+- 어떤 프로젝트 환경에서도 문제없이 사용할 수 있습니다
 
-## Technology Stack
+## 사용 기술
 
-- Bundling: rollup, sucrase
-- Test: vitest
-- Type-safety: zod
-- Dependencies: text-decoding
+- 번들링: rollup, sucrase
+- 테스트: vitest
+- 타입 검증: zod
+- 의존성: text-decoding
 
-## Outcome
+## 결과
 
-**@devcomfort/text-transcoder**는 텍스트 인코딩 변환 라이브러리입니다.
-JavaScript/TypeScript 개발 생태계의 새로운 텍스트 인코딩 변환 라이브러리로서
-타입 안전성, 호환성, 사용성 모두 확보하고자 개발한 라이브러리입니다.
+**@devcomfort/text-transcoder**는 텍스트 인코딩 변환을 위한 새로운 라이브러리입니다.
+JavaScript/TypeScript 개발자들이 안전하고 편리하게 텍스트 인코딩을 변환할 수 있도록 도와줍니다.
 
-2024년 11월 기준 Weekly Download 통계 (NPM Trends):
+2024년 11월 기준 주간 다운로드 통계 (NPM Trends):
 
 <img src="/devcomfort-text-transcoder-npm-trends.png" />
