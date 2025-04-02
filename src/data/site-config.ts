@@ -81,7 +81,7 @@ const siteConfig: SiteConfig = {
     ],
     hero: {
         // title: 'Hi There & Welcome to My Corner of the Web!',
-        text: "안녕하세요 devcomfort 입니다. 2013년부터 프로그래밍을 시작하여 현재는 AI 연구와 주식회사 마시는친구들에서 테크리드로서 협업을 하고 있습니다. 프론트엔드, 백엔드, 인프라, AI 등 다양한 분야에 기반 지식을 가지고 있으며, Tabular Learning, 상관/인과추론, 표현학습, 강화학습, 생성모델, 추천모델 등 다양한 개발 및 연구 주제에 큰 관심을 가지고 있습니다. 제가 진행하는 프로젝트는 <a href='https://github.com/devcomfort'>GitHub</a>에서 확인하실 수 있습니다.",
+        text: "안녕하세요, devcomfort입니다. 2013년부터 프로그래밍을 시작하여 프론트엔드, 백엔드, 인프라, AI 등 다양한 개발 분야에 깊이 있는 지식을 쌓아왔습니다. 특히 강화학습 기반 PCG, 강화학습 기반 추천 시스템, 상관 분석, 그래프 이론 및 GNN, Quality Diversity, 표현학습, Tabular Learning 등 AI 분야의 다양한 주제에 깊은 관심을 가지고 연구와 개발을 병행하고 있습니다. 현재는 [(주)마시는친구들](https://litt.ly/teut)에서 테크리드로 재직 중이며, 다양한 오픈소스 프로젝트를 [GitHub](https://github.com/devcomfort)에서 공개 및 관리하고 있습니다.",
         // image: {
         //     src: '/hero.jpeg',
         //     alt: 'A person sitting at a desk in front of a computer'
@@ -90,6 +90,10 @@ const siteConfig: SiteConfig = {
             {
                 text: 'Get in Touch',
                 href: '/contact'
+            },
+            {
+                text: 'About Me',
+                href: '/about'
             }
         ]
     },
