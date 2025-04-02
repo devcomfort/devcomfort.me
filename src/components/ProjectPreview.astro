@@ -1,12 +1,22 @@
 ---
-import { type CollectionEntry } from 'astro:content';
+import { type CollectionEntry, getCollection } from 'astro:content';
 import ArrowRight from '../icons/ArrowRight.astro';
+import { getTagObjects, getAllTags } from '../utils/data-utils';
 
-type Props = { project: CollectionEntry<'projects'>; class?: string; headingLevel?: 'h2' | 'h3' };
+type Props = { project: CollectionEntry<'projects'>; class?: string; headingLevel?: 'h2' | 'h3'; showTags?: boolean };
 
-const { project, class: className, headingLevel = 'h2' } = Astro.props;
-const { title, description } = project.data;
+const { project, class: className, headingLevel = 'h2', showTags = true } = Astro.props;
+const { title, description, tags = [] } = project.data;
 const TitleTag = headingLevel;
+
+// 태그 처리
+const allProjects = await getCollection('projects');
+const allBlogs = await getCollection('blog');
+const allContent = [...allProjects, ...allBlogs];
+const allTags = getAllTags(allContent);
+const projectTags = getTagObjects(tags, allTags);
+const maxTagsToShow = 3; // 최대 표시할 태그 수
+const visibleTags = projectTags.slice(0, maxTagsToShow);
 ---
 
 <a class:list={['flex justify-between items-start gap-8 group', className]} href={`/projects/${project.slug}/`}>
@@ -17,8 +27,28 @@ const TitleTag = headingLevel;
             {title}
         </TitleTag>
         {description && <div class="mt-1 text-sm leading-normal">{description}</div>}
+
+        {
+            showTags && visibleTags.length > 0 && (
+                <div class="flex flex-wrap gap-2 mt-3">
+                    {visibleTags.map((tag) => (
+                        <a
+                            href={`/tags/${tag.slug}`}
+                            class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium transition-all hover:opacity-80"
+                            style={`background-color: ${tag.color}15; color: ${tag.color};`}
+                            onclick="event.stopPropagation()"
+                        >
+                            {tag.name}
+                        </a>
+                    ))}
+                    {projectTags.length > maxTagsToShow && (
+                        <span class="inline-flex items-center text-xs opacity-60">+{projectTags.length - maxTagsToShow}</span>
+                    )}
+                </div>
+            )
+        }
     </div>
     <div class="hidden font-serif italic opacity-0 transition group-hover:opacity-100 sm:inline-flex sm:gap-1 sm:items-center sm:shrink-0">
-        View Project <ArrowRight class="fill-current w-4 h-4" />
+        프로젝트 보기 <ArrowRight class="fill-current w-4 h-4" />
     </div>
 </a>

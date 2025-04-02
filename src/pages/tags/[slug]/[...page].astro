@@ -4,43 +4,188 @@ import { type CollectionEntry, getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Pagination from '../../../components/Pagination.astro';
 import PostPreview from '../../../components/PostPreview.astro';
+import ProjectPreview from '../../../components/ProjectPreview.astro';
 import Subscribe from '../../../components/Subscribe.astro';
 import siteConfig from '../../../data/site-config';
-import { sortItemsByDateDesc, getAllTags, getPostsByTag } from '../../../utils/data-utils';
+import { sortItemsByDateDesc, getAllTags, getPostsByTag, getRelatedTags } from '../../../utils/data-utils';
+import { slugify } from '../../../utils/common-utils';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-    const posts = (await getCollection('blog')).sort(sortItemsByDateDesc);
-    const tags = getAllTags(posts);
+    // 프로젝트 콘텐츠만 가져오기
+    const projects = (await getCollection('projects')).sort(sortItemsByDateDesc);
 
-    return tags.flatMap((tag) => {
-        const filteredPosts = getPostsByTag(posts, tag.slug);
-        return paginate(filteredPosts, {
-            params: { slug: tag.slug },
-            pageSize: siteConfig.postsPerPage || 4
+    // 블로그 컬렉션이 존재하는지 확인 후 가져오기
+    let posts: CollectionEntry<'blog'>[] = [];
+    try {
+        posts = await getCollection('blog');
+        posts.sort(sortItemsByDateDesc);
+    } catch (error) {
+        console.log('블로그 컬렉션을 가져올 수 없습니다:', error);
+    }
+
+    const allItems = [...projects, ...posts].sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime());
+
+    // 유효한 태그만 가져오기
+    const tags = getAllTags(allItems).filter((tag) => tag && tag.slug); // slug가 있는 태그만 필터링
+
+    // 각 태그에 대한 페이지 생성
+    return tags
+        .filter((tag) => tag.slug) // slug가 있는 태그만 필터링
+        .flatMap((tag) => {
+            // 해당 태그를 가진 콘텐츠 아이템 찾기
+            const filteredProjects = projects.filter((project) => (project.data.tags || []).some((t) => slugify(t) === tag.slug));
+
+            let filteredPosts: CollectionEntry<'blog'>[] = [];
+            if (posts.length > 0) {
+                filteredPosts = posts.filter((post) => (post.data.tags || []).some((t) => slugify(t) === tag.slug));
+            }
+
+            // 모든 콘텐츠 아이템 합치기 및 날짜순 정렬
+            const filteredItems = [...filteredProjects, ...filteredPosts].sort(
+                (a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime()
+            );
+
+            // 해당 태그에 콘텐츠가 없으면 페이지 생성하지 않음
+            if (filteredItems.length === 0) {
+                return [];
+            }
+
+            // 페이지네이션
+            return paginate(filteredItems, {
+                params: { slug: tag.slug },
+                pageSize: siteConfig.postsPerPage || 4,
+                props: { tag }
+            });
         });
-    });
 }
 
-type Props = { page: Page<CollectionEntry<'blog'>> };
+type Props = {
+    page: Page<CollectionEntry<any>>;
+    tag: {
+        name: string;
+        slug: string;
+        color?: string;
+        description?: string;
+    };
+};
 
-const { page } = Astro.props;
-const blog = page.data;
+const { page, tag: passedTag } = Astro.props;
+const items = page.data;
 const params = Astro.params;
-const allPosts = await getCollection('blog');
-const allTags = getAllTags(allPosts);
-const currentTag = allTags.find((tag) => {
-    return tag.slug === params.slug;
-});
+const searchParams = Astro.url.searchParams;
+const filterType = searchParams.get('filter') || 'all'; // all, blog, projects
+
+// 프로젝트 콘텐츠만 가져오기
+const allProjects = await getCollection('projects');
+
+// 블로그 컬렉션이 존재하는지 확인 후 가져오기
+let allPosts: CollectionEntry<'blog'>[] = [];
+try {
+    allPosts = await getCollection('blog');
+} catch (error) {
+    console.log('블로그 컬렉션을 가져올 수 없습니다:', error);
+}
+
+const allItems = [...allProjects, ...allPosts];
+
+const allTags = getAllTags(allItems);
+const currentTag = passedTag || allTags.find((tag) => tag.slug === params.slug);
+const relatedTags = currentTag ? getRelatedTags(currentTag.slug, allTags) : [];
+
+// 필터 적용
+const filteredItems =
+    filterType === 'all'
+        ? items
+        : items.filter((item) => {
+              if (filterType === 'blog' && allPosts.length > 0) return item.collection === 'blog';
+              if (filterType === 'projects') return item.collection === 'projects';
+              return true;
+          });
+
+const seoTitle = `"${currentTag?.name}" 태그의 콘텐츠`;
+const seoDescription = currentTag?.description || `"${currentTag?.name}" 태그와 관련된 콘텐츠들을 모아볼 수 있습니다.`;
 ---
 
-<BaseLayout
-    title={`Posts Tagged ${currentTag?.name}`}
-    description={`Explore a curated collection of blog posts under ${currentTag?.name}`}
-    image={{ src: '/dante-preview.jpg', alt: 'The preview of the site' }}
-    showHeader={false}
->
-    <h1 class="mb-12 text-2xl leading-tight font-serif italic sm:mb-16 sm:text-4xl">Posts Tagged "{currentTag?.name}"</h1>
-    {blog.map((post) => <PostPreview post={post} class="mb-10 sm:mb-12" />)}
-    <Pagination page={page} class="my-16 sm:my-24" />
+<BaseLayout title={seoTitle} description={seoDescription} image={{ src: '/dante-preview.jpg', alt: 'The preview of the site' }} showHeader={false}>
+    <div class="mb-12 sm:mb-16">
+        <div class="py-4 px-6 mb-6 rounded-lg inline-block" style={`background-color: ${currentTag?.color}15; border-left: 4px solid ${currentTag?.color};`}>
+            <h1 class="text-2xl leading-tight font-serif italic sm:text-4xl">
+                "{currentTag?.name}" 태그의 콘텐츠
+            </h1>
+            {currentTag?.description && <p class="mt-2 opacity-80">{currentTag.description}</p>}
+        </div>
+
+        {
+            relatedTags.length > 0 && (
+                <div class="mt-4">
+                    <span class="text-sm opacity-70">관련 태그: </span>
+                    <div class="flex flex-wrap gap-2 mt-1">
+                        {relatedTags.map((tag) => (
+                            <a
+                                href={`/tags/${tag.slug}`}
+                                class="inline-flex items-center rounded-full px-3 py-1 text-xs font-medium transition-all hover:opacity-80"
+                                style={`background-color: ${tag.color}20; color: ${tag.color};`}
+                            >
+                                {tag.name}
+                            </a>
+                        ))}
+                    </div>
+                </div>
+            )
+        }
+
+        <div class="flex flex-wrap gap-3 mt-8">
+            <a
+                href={`/tags/${currentTag?.slug}`}
+                class:list={[
+                    'inline-flex items-center rounded-full px-4 py-1.5 text-sm font-medium transition-all hover:opacity-80',
+                    filterType === 'all' ? 'bg-gray-900 text-white dark:bg-white dark:text-gray-900' : 'bg-gray-100 dark:bg-gray-800'
+                ]}
+            >
+                전체
+            </a>
+            <a
+                href={`/tags/${currentTag?.slug}?filter=blog`}
+                class:list={[
+                    'inline-flex items-center rounded-full px-4 py-1.5 text-sm font-medium transition-all hover:opacity-80',
+                    filterType === 'blog' ? 'bg-gray-900 text-white dark:bg-white dark:text-gray-900' : 'bg-gray-100 dark:bg-gray-800'
+                ]}
+            >
+                블로그
+            </a>
+            <a
+                href={`/tags/${currentTag?.slug}?filter=projects`}
+                class:list={[
+                    'inline-flex items-center rounded-full px-4 py-1.5 text-sm font-medium transition-all hover:opacity-80',
+                    filterType === 'projects' ? 'bg-gray-900 text-white dark:bg-white dark:text-gray-900' : 'bg-gray-100 dark:bg-gray-800'
+                ]}
+            >
+                프로젝트
+            </a>
+        </div>
+    </div>
+
+    {
+        filteredItems.length > 0 ? (
+            <>
+                <div class="space-y-12">
+                    {filteredItems.map((item: any) => {
+                        if (item.collection === 'blog') {
+                            return <PostPreview post={item} class="mb-0" />;
+                        } else if (item.collection === 'projects') {
+                            return <ProjectPreview project={item} class="mb-0" />;
+                        }
+                        return null;
+                    })}
+                </div>
+                <Pagination page={page} class="my-16 sm:my-24" />
+            </>
+        ) : (
+            <div class="text-center py-12 px-4">
+                <p class="opacity-70 font-serif italic">이 태그에 해당하는 콘텐츠가 아직 없습니다.</p>
+            </div>
+        )
+    }
+
     <Subscribe class="my-16 sm:my-24" />
 </BaseLayout>

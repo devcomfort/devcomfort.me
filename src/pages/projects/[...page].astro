@@ -5,7 +5,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Pagination from '../../components/Pagination.astro';
 import ProjectPreview from '../../components/ProjectPreview.astro';
 import siteConfig from '../../data/site-config';
-import { sortItemsByDateDesc } from '../../utils/data-utils';
+import { sortItemsByDateDesc, getAllTags, sortTagsByWeight } from '../../utils/data-utils';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
     const projects = (await getCollection('projects')).sort(sortItemsByDateDesc);
@@ -16,15 +16,59 @@ type Props = { page: Page<CollectionEntry<'projects'>> };
 
 const { page } = Astro.props;
 const portfolio = page.data;
+
+// 프로젝트에서 사용된 모든 태그 가져오기
+const allProjects = await getCollection('projects');
+const projectTags = getAllTags(allProjects);
+const popularTags = sortTagsByWeight(projectTags, allProjects).slice(0, 10); // 인기 태그 10개만 표시
 ---
 
 <BaseLayout
-    title="Portfolio"
-    description="Explore a diverse portfolio showcasing my passion and expertise"
+    title="포트폴리오"
+    description="다양한 프로젝트를 통해 제 기술과 열정을 확인해보세요"
     image={{ src: '/dante-preview.jpg', alt: 'The preview of the site' }}
     showHeader={false}
 >
-    <h1 class="mb-12 text-2xl leading-tight font-serif italic sm:mb-16 sm:text-4xl">Projects</h1>
-    {portfolio.map((project) => <ProjectPreview project={project} class="mb-10 sm:mb-12" />)}
-    <Pagination page={page} class="my-16 sm:my-24" />
+    <h1 class="mb-8 text-2xl leading-tight font-serif italic sm:text-4xl">프로젝트</h1>
+
+    {
+        popularTags.length > 0 && (
+            <div class="mb-12">
+                <div class="flex flex-wrap gap-2">
+                    <a
+                        href="/projects/"
+                        class="inline-flex items-center rounded-full px-4 py-1.5 text-sm font-medium transition-all hover:opacity-80 bg-gray-100 dark:bg-gray-800"
+                    >
+                        전체
+                    </a>
+                    {popularTags.map((tag) => (
+                        <a
+                            href={`/tags/${tag.slug}?filter=projects`}
+                            class="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium transition-all hover:opacity-80"
+                            style={`background-color: ${tag.color}20; color: ${tag.color};`}
+                        >
+                            {tag.name}
+                        </a>
+                    ))}
+                </div>
+            </div>
+        )
+    }
+
+    {
+        portfolio.length > 0 ? (
+            <>
+                <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+                    {portfolio.map((project) => (
+                        <ProjectPreview project={project} class="mb-0" />
+                    ))}
+                </div>
+                <Pagination page={page} class="my-16 sm:my-24" />
+            </>
+        ) : (
+            <div class="py-16 text-center">
+                <p class="text-lg opacity-70">아직 등록된 프로젝트가 없습니다.</p>
+            </div>
+        )
+    }
 </BaseLayout>
