@@ -2,6 +2,14 @@
 title: 'blob-to-url'
 description: Blob 객체를 URL로 변환하고 관리하는 JavaScript/TypeScript 라이브러리입니다.
 publishDate: 'Apr 01 2025'
+isFeatured: true
+tags:
+  - TypeScript
+  - 라이브러리
+  - 웹 개발
+  - 파일 처리
+projectUrl: 'https://www.npmjs.com/package/blob-to-url'
+sourceUrl: 'https://github.com/devcomfort/blob-to-url'
 # seo:
 #   image:
 #     src: '/project-2.jpg'

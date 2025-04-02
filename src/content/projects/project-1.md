@@ -2,6 +2,14 @@
 title: '@devcomfort/text-transcoder'
 description: 텍스트 인코딩 변환을 쉽게 할 수 있는 JavaScript/TypeScript 라이브러리입니다.
 publishDate: 'Apr 01 2025'
+isFeatured: true
+tags:
+  - TypeScript
+  - 라이브러리
+  - 텍스트 처리
+  - 오픈소스
+projectUrl: 'https://www.npmjs.com/package/@devcomfort/text-transcoder'
+sourceUrl: 'https://github.com/devcomfort/devcomfort-text-transcoder'
 # seo:
 #   image:
 #     src: '/project-1.jpg'
