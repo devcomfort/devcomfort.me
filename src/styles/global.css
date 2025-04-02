@@ -48,3 +48,102 @@
     }
     */
 }
+
+@layer components {
+    .npm-chart {
+        width: 100%;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        margin: 1.5rem 0;
+        background-color: white;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    .dark .npm-chart {
+        background-color: #1a1a1a;
+    }
+
+    .github-stats {
+        width: 100%;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        margin: 1.5rem 0;
+        background-color: white;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    .dark .github-stats {
+        background-color: #1a1a1a;
+    }
+
+    .chart-header, .stats-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 0.75rem;
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #eaeaea;
+        font-size: 0.875rem;
+        border-top-left-radius: 0.5rem;
+        border-top-right-radius: 0.5rem;
+    }
+    
+    .dark .chart-header, .dark .stats-header {
+        background-color: #2d2d2d;
+        border-bottom: 1px solid #444;
+    }
+    
+    .chart-header a, .stats-header a {
+        color: #0366d6;
+        text-decoration: none;
+        font-weight: 500;
+    }
+    
+    .dark .chart-header a, .dark .stats-header a {
+        color: #58a6ff;
+    }
+    
+    .chart-header a:hover, .stats-header a:hover {
+        text-decoration: underline;
+    }
+    
+    .view-full {
+        font-size: 0.75rem;
+        color: #6c757d;
+    }
+    
+    .dark .view-full {
+        color: #adb5bd;
+    }
+    
+    .github-stats iframe, .npm-chart iframe {
+        width: 100%;
+        border: none;
+        background-color: transparent;
+    }
+    
+    .github-stats iframe {
+        height: 150px;
+    }
+    
+    .npm-chart iframe {
+        height: 300px;
+    }
+    
+    /* GitHub Stats 다크모드/라이트모드 전환 */
+    .dark-mode-stats {
+        display: none;
+    }
+    
+    .light-mode-stats {
+        display: block;
+    }
+    
+    .dark .dark-mode-stats {
+        display: block;
+    }
+    
+    .dark .light-mode-stats {
+        display: none;
+    }
+}

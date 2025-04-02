@@ -1,0 +1,158 @@
+---
+/**
+ * GitHub Stats 컴포넌트
+ * GitHub 저장소의 통계와 활동 정보를 표시합니다.
+ */
+
+interface Props {
+    /**
+     * GitHub 사용자명 (필수)
+     */
+    username: string;
+
+    /**
+     * GitHub 저장소 이름 (필수)
+     */
+    repo: string;
+
+    /**
+     * 테마 (기본값: 'dark')
+     * 가능한 값: 'dark', 'light', 'radical', 'merko', 'gruvbox', 'tokyonight', 'onedark', 'cobalt', 'synthwave', 'highcontrast', 'dracula'
+     */
+    theme?: string;
+
+    /**
+     * 밝은 테마 (기본값: 'vue')
+     */
+    lightTheme?: string;
+
+    /**
+     * 카드 높이 (기본값: 150)
+     */
+    height?: number;
+
+    /**
+     * 카드 타입 (기본값: 'pin')
+     * - pin: 저장소 핀 카드
+     * - stats: 통계 카드
+     * - langs: 언어 사용 통계
+     */
+    type?: 'pin' | 'stats' | 'langs';
+}
+
+const { username, repo, theme = 'vue-dark', lightTheme = 'vue', height = 150, type = 'pin' } = Astro.props;
+
+// URL 생성
+const generateStatUrl = (selectedTheme: string) => {
+    if (type === 'pin') {
+        return `https://github-readme-stats.vercel.app/api/pin/?username=${username}&repo=${repo}&theme=${selectedTheme}`;
+    } else if (type === 'stats') {
+        return `https://github-readme-stats.vercel.app/api?username=${username}&show_icons=true&theme=${selectedTheme}`;
+    } else if (type === 'langs') {
+        return `https://github-readme-stats.vercel.app/api/top-langs/?username=${username}&layout=compact&theme=${selectedTheme}&hide=html`;
+    }
+    return '';
+};
+
+const darkUrl = generateStatUrl(theme);
+const lightUrl = generateStatUrl(lightTheme);
+const repoUrl = `https://github.com/${username}/${repo}`;
+---
+
+<div class="github-stats">
+    <div class="stats-header">
+        <a href={repoUrl} target="_blank" rel="noopener noreferrer">
+            {username}/{repo}
+        </a>
+        <a href={repoUrl} target="_blank" rel="noopener noreferrer" class="view-full">GitHub 방문</a>
+    </div>
+    <iframe
+        src={darkUrl}
+        width="100%"
+        height={height}
+        frameborder="0"
+        scrolling="no"
+        title={`${username}/${repo} GitHub 통계`}
+        loading="lazy"
+        class="dark-mode-stats"
+    >
+    </iframe>
+    <iframe
+        src={lightUrl}
+        width="100%"
+        height={height}
+        frameborder="0"
+        scrolling="no"
+        title={`${username}/${repo} GitHub 통계`}
+        loading="lazy"
+        class="light-mode-stats"
+    >
+    </iframe>
+</div>
+
+<style>
+    .github-stats {
+        width: 100%;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        margin: 1.5rem 0;
+        background-color: white;
+        box-shadow:
+            0 4px 6px -1px rgba(0, 0, 0, 0.1),
+            0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    .dark .github-stats {
+        background-color: #1a1a1a;
+    }
+
+    .stats-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 0.75rem;
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #eaeaea;
+        font-size: 0.875rem;
+        border-top-left-radius: 0.5rem;
+        border-top-right-radius: 0.5rem;
+    }
+
+    .dark .stats-header {
+        background-color: #2d2d2d;
+        border-bottom: 1px solid #444;
+    }
+
+    .light .stats-header {
+        background-color: #f6f8fa;
+        border-bottom: 1px solid #d0d7de;
+    }
+
+    .stats-header a {
+        color: #58a6ff;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .light .stats-header a {
+        color: #0969da;
+    }
+
+    .stats-header a:hover {
+        text-decoration: underline;
+    }
+
+    .view-full {
+        font-size: 0.75rem;
+        color: #8b949e;
+    }
+
+    .light .view-full {
+        color: #57606a;
+    }
+
+    iframe {
+        border-bottom-left-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
+    }
+</style>

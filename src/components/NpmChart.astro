@@ -1,0 +1,126 @@
+---
+/**
+ * NPM Chart 컴포넌트
+ * NPM 패키지의 다운로드 통계 차트를 표시합니다.
+ */
+
+interface Props {
+    /**
+     * NPM 패키지 이름 (필수)
+     * 예: '@devcomfort/text-transcoder', 'blob-to-url'
+     */
+    packageName: string;
+
+    /**
+     * 차트 높이 (기본값: 300)
+     */
+    height?: number;
+
+    /**
+     * 최소화 모드 (기본값: true)
+     * true: 간단한 차트만 표시
+     * false: 더 많은 정보와 상호작용 가능한 차트 표시
+     */
+    minimal?: boolean;
+
+    /**
+     * 기간 (기본값: 'month')
+     * - day: 하루 단위 (interval=1)
+     * - week: 주 단위 (interval=7)
+     * - month: 월 단위 (interval=30)
+     */
+    period?: 'day' | 'week' | 'month';
+}
+
+const { packageName, height = 300, minimal = true, period = 'month' } = Astro.props;
+
+// 입력된 period 값을 npmcharts.com이 지원하는 interval 값으로 변환
+let interval = 30; // 기본값: 월 단위
+
+switch (period) {
+    case 'day':
+        interval = 1;
+        break;
+    case 'week':
+        interval = 7;
+        break;
+    case 'month':
+    default:
+        interval = 30;
+        break;
+}
+
+// URL 생성
+const chartUrl = `https://www.npmcharts.com/compare/${encodeURIComponent(packageName)}?${minimal ? 'minimal=true' : ''}&interval=${interval}`;
+
+// 기간별 텍스트 설정
+const periodText = period === 'day' ? '일간' : period === 'week' ? '주간' : '월간';
+---
+
+<div class="npm-chart">
+    <div class="chart-header">
+        <a href={`https://www.npmjs.com/package/${encodeURIComponent(packageName)}`} target="_blank" rel="noopener noreferrer">
+            {packageName}
+        </a>
+        <span class="period-label">{periodText} 다운로드</span>
+        <a href={chartUrl} target="_blank" rel="noopener noreferrer" class="view-full">차트 확대</a>
+    </div>
+    <iframe src={chartUrl} width="100%" height={height} frameborder="0" scrolling="no" title={`${packageName} ${periodText} 다운로드 통계`} loading="lazy"
+    ></iframe>
+</div>
+
+<style>
+    .chart-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 0.75rem;
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #eaeaea;
+        font-size: 0.875rem;
+        border-top-left-radius: 0.5rem;
+        border-top-right-radius: 0.5rem;
+    }
+
+    .dark .chart-header {
+        background-color: #2d2d2d;
+        border-bottom: 1px solid #444;
+    }
+
+    .chart-header a {
+        color: #0366d6;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .chart-header a:hover {
+        text-decoration: underline;
+    }
+
+    .period-label {
+        font-size: 0.75rem;
+        color: #6c757d;
+        background-color: #e9ecef;
+        padding: 0.25rem 0.5rem;
+        border-radius: 1rem;
+    }
+
+    .dark .period-label {
+        color: #adb5bd;
+        background-color: #343a40;
+    }
+
+    .view-full {
+        font-size: 0.75rem;
+        color: #6c757d;
+    }
+
+    .dark .view-full {
+        color: #adb5bd;
+    }
+
+    iframe {
+        border-bottom-left-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
+    }
+</style>

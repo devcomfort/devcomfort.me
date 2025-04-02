@@ -4,11 +4,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProjectPreview from '../../components/ProjectPreview.astro';
 import Button from '../../components/Button.astro';
 import { sortItemsByDateDesc, getAllTags, getTagObjects } from '../../utils/data-utils';
+import NpmChart from '../../components/NpmChart.astro';
+import GitHubStats from '../../components/GitHubStats.astro';
 
 export async function getStaticPaths() {
     const projects = (await getCollection('projects')).sort(sortItemsByDateDesc);
     const projectCount = projects.length;
-    return projects.map((project, index) => ({
+    return projects.map((project: CollectionEntry<'projects'>, index: number) => ({
         params: { slug: project.slug },
         props: {
             project,
@@ -30,6 +32,28 @@ const allBlogs = await getCollection('blog');
 const allContent = [...allProjects, ...allBlogs];
 const allTags = getAllTags(allContent);
 const projectTags = getTagObjects(tags, allTags);
+
+// NPM 패키지명 자동 추출
+let npmPackageName = null;
+// front-matter의 projectUrl에서 패키지 이름 추출
+if (projectUrl && projectUrl.includes('npmjs.com/package/')) {
+    // npmjs.com/package/ 뒤의 패키지 이름 추출
+    npmPackageName = projectUrl.split('npmjs.com/package/')[1].trim();
+}
+
+// GitHub 저장소 정보 추출
+let githubRepo = null;
+// sourceUrl에서 GitHub 사용자명과 저장소 이름 추출
+if (sourceUrl && sourceUrl.includes('github.com/')) {
+    const githubPath = sourceUrl.split('github.com/')[1].trim();
+    const parts = githubPath.split('/');
+    if (parts.length >= 2) {
+        githubRepo = {
+            username: parts[0],
+            repo: parts[1]
+        };
+    }
+}
 ---
 
 <BaseLayout title={seo?.title ?? title} description={seo?.description ?? description} image={seo?.image} pageType="article" showHeader={false}>
@@ -72,6 +96,26 @@ const projectTags = getTagObjects(tags, allTags);
         </header>
         <div class="max-w-none prose prose-dante sm:prose-lg">
             <Content />
+
+            {/* NPM 차트 컴포넌트 추가 */}
+            {
+                npmPackageName && (
+                    <div class="my-8">
+                        <h3>NPM 다운로드 통계:</h3>
+                        <NpmChart packageName={npmPackageName} height={300} period="week" />
+                    </div>
+                )
+            }
+
+            {/* GitHub 통계 컴포넌트 추가 */}
+            {
+                githubRepo && (
+                    <div class="my-8">
+                        <h3>GitHub 저장소 활동:</h3>
+                        <GitHubStats username={githubRepo.username} repo={githubRepo.repo} theme="vue-dark" />
+                    </div>
+                )
+            }
         </div>
     </article>
     {

@@ -56,6 +56,4 @@ sourceUrl: 'https://github.com/devcomfort/devcomfort-text-transcoder'
 **@devcomfort/text-transcoder**는 텍스트 인코딩 변환을 위한 새로운 라이브러리입니다.
 JavaScript/TypeScript 개발자들이 안전하고 편리하게 텍스트 인코딩을 변환할 수 있도록 도와줍니다.
 
-주간 다운로드 통계 (NPM Trends):
-
-<img src="https://www.npmcharts.com/compare/@devcomfort/text-transcoder?minimal=true" />
+<!-- 주간 다운로드 통계는 컴포넌트로 자동 추가됩니다 -->

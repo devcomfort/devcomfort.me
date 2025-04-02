@@ -71,6 +71,6 @@ revokeUrl(url);
 **blob-to-url**은 웹 개발자들이 Blob URL을 더 쉽고 안전하게 다룰 수 있게 해주는 라이브러리입니다.
 자동 메모리 관리 기능으로 메모리 누수 걱정 없이 파일 처리, 데이터 다운로드, 이미지 미리보기 등 다양한 웹 기능을 구현할 수 있습니다.
 
-주간 다운로드 통계 (NPM Trends):
+<!-- 주간 다운로드 통계는 컴포넌트로 자동 추가됩니다 -->
 
-<img src="https://www.npmcharts.com/compare/@devcomfort/text-transcoder?minimal=true" /> 
+// ... existing code ... 
