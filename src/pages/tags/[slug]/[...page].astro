@@ -97,8 +97,8 @@ const filteredItems =
     filterType === 'all'
         ? items
         : items.filter((item) => {
-              if (filterType === 'blog' && allPosts.length > 0) return item.collection === 'blog';
-              if (filterType === 'projects') return item.collection === 'projects';
+              if (filterType === 'blog' && allPosts.length > 0) return (item as any).collection === 'blog';
+              if (filterType === 'projects') return (item as any).collection === 'projects';
               return true;
           });
 
@@ -119,12 +119,12 @@ const seoDescription = currentTag?.description || `"${currentTag?.name}" 태그�
             relatedTags.length > 0 && (
                 <div class="mt-4">
                     <span class="text-sm opacity-70">관련 태그: </span>
-                    <div class="flex flex-wrap gap-2 mt-1">
+                    <div class="flex flex-wrap gap-1.5 mt-1">
                         {relatedTags.map((tag) => (
                             <a
                                 href={`/tags/${tag.slug}`}
-                                class="inline-flex items-center rounded-full px-3 py-1 text-xs font-medium transition-all hover:opacity-80"
-                                style={`background-color: ${tag.color}20; color: ${tag.color};`}
+                                class="inline-flex items-center rounded-full px-2 text-xs font-medium transition-all hover:opacity-80"
+                                style={`background-color: ${tag.color}20; color: ${tag.color}; padding-top: 0.1rem; padding-bottom: 0.1rem;`}
                             >
                                 {tag.name}
                             </a>
@@ -134,31 +134,34 @@ const seoDescription = currentTag?.description || `"${currentTag?.name}" 태그�
             )
         }
 
-        <div class="flex flex-wrap gap-3 mt-8">
+        <div class="flex flex-wrap gap-2 mt-8">
             <a
                 href={`/tags/${currentTag?.slug}`}
                 class:list={[
-                    'inline-flex items-center rounded-full px-4 py-1.5 text-sm font-medium transition-all hover:opacity-80',
+                    'inline-flex items-center rounded-full px-3 text-sm font-medium transition-all hover:opacity-80',
                     filterType === 'all' ? 'bg-gray-900 text-white dark:bg-white dark:text-gray-900' : 'bg-gray-100 dark:bg-gray-800'
                 ]}
+                style="padding-top: 0.25rem; padding-bottom: 0.25rem;"
             >
                 전체
             </a>
             <a
                 href={`/tags/${currentTag?.slug}?filter=blog`}
                 class:list={[
-                    'inline-flex items-center rounded-full px-4 py-1.5 text-sm font-medium transition-all hover:opacity-80',
+                    'inline-flex items-center rounded-full px-3 text-sm font-medium transition-all hover:opacity-80',
                     filterType === 'blog' ? 'bg-gray-900 text-white dark:bg-white dark:text-gray-900' : 'bg-gray-100 dark:bg-gray-800'
                 ]}
+                style="padding-top: 0.25rem; padding-bottom: 0.25rem;"
             >
                 블로그
             </a>
             <a
                 href={`/tags/${currentTag?.slug}?filter=projects`}
                 class:list={[
-                    'inline-flex items-center rounded-full px-4 py-1.5 text-sm font-medium transition-all hover:opacity-80',
+                    'inline-flex items-center rounded-full px-3 text-sm font-medium transition-all hover:opacity-80',
                     filterType === 'projects' ? 'bg-gray-900 text-white dark:bg-white dark:text-gray-900' : 'bg-gray-100 dark:bg-gray-800'
                 ]}
+                style="padding-top: 0.25rem; padding-bottom: 0.25rem;"
             >
                 프로젝트
             </a>
@@ -169,10 +172,10 @@ const seoDescription = currentTag?.description || `"${currentTag?.name}" 태그�
         filteredItems.length > 0 ? (
             <>
                 <div class="space-y-12">
-                    {filteredItems.map((item: CollectionEntry<'blog'> | CollectionEntry<'projects'>) => {
-                        if (item.collection === 'blog') {
+                    {filteredItems.map((item) => {
+                        if ((item as any).collection === 'blog') {
                             return <PostPreview post={item as CollectionEntry<'blog'>} class="mb-0" />;
-                        } else if (item.collection === 'projects') {
+                        } else if ((item as any).collection === 'projects') {
                             return <ProjectPreview project={item as CollectionEntry<'projects'>} class="mb-0" />;
                         }
                         return null;

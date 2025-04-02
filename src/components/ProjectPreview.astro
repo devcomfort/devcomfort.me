@@ -30,19 +30,21 @@ const visibleTags = projectTags.slice(0, maxTagsToShow);
 
         {
             showTags && visibleTags.length > 0 && (
-                <div class="flex flex-wrap gap-2 mt-3">
+                <div class="flex-wrap gap-2 mt-3 inline-block">
                     {visibleTags.map((tag) => (
                         <a
                             href={`/tags/${tag.slug}`}
-                            class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium transition-all hover:opacity-80"
-                            style={`background-color: ${tag.color}15; color: ${tag.color};`}
+                            class="inline-flex items-center rounded-full px-2 text-xs font-medium transition-all hover:opacity-80"
+                            style={`background-color: ${tag.color}15; color: ${tag.color}; padding-top: 0.1rem; padding-bottom: 0.1rem; margin-right: 0.5rem; margin-bottom: 0.5rem; display: inline-flex;`}
                             onclick="event.stopPropagation()"
                         >
                             {tag.name}
                         </a>
                     ))}
                     {projectTags.length > maxTagsToShow && (
-                        <span class="inline-flex items-center text-xs opacity-60">+{projectTags.length - maxTagsToShow}</span>
+                        <span class="inline-flex items-center text-xs opacity-60" style="margin-bottom: 0.5rem; display: inline-flex;">
+                            +{projectTags.length - maxTagsToShow}
+                        </span>
                     )}
                 </div>
             )

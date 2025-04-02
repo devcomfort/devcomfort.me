@@ -1,3 +1,4 @@
+---
 import type { Tag } from '../utils/data-utils';
 
 interface Props {
@@ -11,24 +12,27 @@ interface Props {
 const { tag, size = 'md', showCount = false, count, class: className } = Astro.props;
 
 const sizeClasses = {
-    sm: 'px-2 py-0.5 text-xs',
-    md: 'px-3 py-1 text-sm',
-    lg: 'px-4 py-1.5 text-base'
+    sm: 'px-1.5 text-xs',
+    md: 'px-2 text-sm',
+    lg: 'px-3 text-base'
 };
+---
 
-<a 
+<a
     href={`/tags/${tag.slug}`}
-    class:list={[
-        'inline-flex items-center rounded-full font-medium transition-all hover:opacity-80',
-        sizeClasses[size],
-        className
-    ]}
-    style={`background-color: ${tag.color}20; color: ${tag.color};`}
+    class:list={['inline-flex items-center rounded-full font-medium transition-all hover:opacity-80', sizeClasses[size], className]}
+    style={`background-color: ${tag.color}20; color: ${tag.color}; padding-top: 0.1rem; padding-bottom: 0.1rem;`}
 >
     {tag.name}
-    {showCount && count !== undefined && (
-        <span class="ml-1.5 inline-flex items-center justify-center rounded-full bg-white bg-opacity-25 px-1.5 py-0.5 text-xs">
-            {count}
-        </span>
-    )}
-</a> 
+    {
+        showCount && count !== undefined && (
+            <span
+                class="ml-1.5 inline-flex items-center justify-center rounded-full bg-white bg-opacity-25 px-1.5 text-xs"
+                style="padding-top: 0.1rem; padding-bottom: 0.1rem;"
+            >
+                {count}
+            </span>
+        )
+    }
+</a>
+
