@@ -169,11 +169,11 @@ const seoDescription = currentTag?.description || `"${currentTag?.name}" 태그�
         filteredItems.length > 0 ? (
             <>
                 <div class="space-y-12">
-                    {filteredItems.map((item: any) => {
+                    {filteredItems.map((item: CollectionEntry<'blog'> | CollectionEntry<'projects'>) => {
                         if (item.collection === 'blog') {
-                            return <PostPreview post={item} class="mb-0" />;
+                            return <PostPreview post={item as CollectionEntry<'blog'>} class="mb-0" />;
                         } else if (item.collection === 'projects') {
-                            return <ProjectPreview project={item} class="mb-0" />;
+                            return <ProjectPreview project={item as CollectionEntry<'projects'>} class="mb-0" />;
                         }
                         return null;
                     })}

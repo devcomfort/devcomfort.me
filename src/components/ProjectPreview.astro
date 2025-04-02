@@ -19,8 +19,8 @@ const maxTagsToShow = 3; // 최대 표시할 태그 수
 const visibleTags = projectTags.slice(0, maxTagsToShow);
 ---
 
-<a class:list={['flex justify-between items-start gap-8 group', className]} href={`/projects/${project.slug}/`}>
-    <div class="grow">
+<a class:list={['flex justify-between items-start gap-4 group', className]} href={`/projects/${project.slug}/`}>
+    <div class="grow min-w-0">
         <TitleTag
             class="text-xl leading-tight font-serif font-medium group-hover:underline group-hover:decoration-dashed group-hover:underline-offset-4 group-hover:decoration-1 sm:text-2xl"
         >
@@ -48,7 +48,7 @@ const visibleTags = projectTags.slice(0, maxTagsToShow);
             )
         }
     </div>
-    <div class="hidden font-serif italic opacity-0 transition group-hover:opacity-100 sm:inline-flex sm:gap-1 sm:items-center sm:shrink-0">
+    <div class="hidden font-serif italic opacity-0 transition group-hover:opacity-100 sm:inline-flex sm:gap-1 sm:items-center sm:shrink-0 sm:whitespace-nowrap">
         프로젝트 보기 <ArrowRight class="fill-current w-4 h-4" />
     </div>
 </a>

@@ -58,7 +58,7 @@ const popularTags = sortTagsByWeight(projectTags, allProjects).slice(0, 10); // 
     {
         portfolio.length > 0 ? (
             <>
-                <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+                <div class="space-y-12">
                     {portfolio.map((project) => (
                         <ProjectPreview project={project} class="mb-0" />
                     ))}
