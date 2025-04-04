@@ -1,20 +1,16 @@
 ---
-title: Get in touch
+title: Contact Me
 seo:
-  title: Contact
-  description: 개발자 devcomfort와 함께 이야기 나눠보세요.
+  title: Contact Me
 ---
 
-안녕하세요! 방문해 주셔서 감사합니다 👋
 
-풀스택 개발과 AI 연구를 하면서 다양한 분들과 이야기를 나누고 싶습니다. 특히 아래 주제들에 관심이 많습니다:
+안녕하십니까. 풀스택 개발자와 AI 연구자를 겸하고 있는 devcomfort 입니다.
+저는 풀스택 개발, AI를 포함하여 다른 분야의 사람과 대화를 나누는 것을 좋아합니다.
 
-- 강화학습, 표현학습, Tabular Learning 등 AI 연구 주제
-- 웹 개발 및 오픈소스 프로젝트 협업
-- 개발 멘토링과 기술 관련 질문
-- 개발자 커리어와 성장에 대한 고민
+강화학습, 표현학습 등의 AI 연구 이야기, 개발 프로젝트 협업 요청, 멘토링 및 기술 관련 질문 등
+다양한 주제 모두 환영하니 궁금한 점이 있거나 함께 나누고 싶은 이야기가 있다면
+언제든 편하게 연락주시기 바랍니다. 최대한 빠른 시일 내에 답장 드리겠습니다.
 
-궁금한 점이 있거나 함께 나누고 싶은 이야기가 있다면, 언제든 편하게 연락 주시기 바랍니다. 최대한 빠른 시일 내에 답장 드리겠습니다.
-
-_이메일_: [im@devcomfort.me](mailto:im@devcomfort.me) <br>
-_회사_: [devcomfort@t-eut.com](mailto:devcomfort@t-eut.com)
+_개인 이메일_: [im@devcomfort.me](mailto:im@devcomfort.me) <br>
+_회사 이메일_: [devcomfort@t-eut.com](mailto:devcomfort@t-eut.com)
